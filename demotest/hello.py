@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-'''示例登录测试用例
-'''
-
 from demolib.demotestbase import DemoTestBase
 from demolib.demoapp import DemoApp
+from demolib.login import LoginPanel
+from panel.GuidePanel import Guide
 
 class HelloTest(DemoTestBase):
     '''示例登录测试用例
@@ -18,15 +17,34 @@ class HelloTest(DemoTestBase):
         #--------------------------
         self.start_step('1、登录Android demo')
         #--------------------------
-        acc = "admin"
-        pwd = "admin"
+        acc = "17067989781"
+        pwd = "fudao666"
         device = self.acquire_device()
         app = DemoApp(device)
-        app.login(acc, pwd)
-        self.log_info("登录完成")        
-        self.waitForEqual('当前Activity为：com.qta.qt4a.demo.HomeActivity', app.device, 'current_activity', 'com.qta.qt4a.demo.HomeActivity')
 
-    
+        login = LoginPanel(app)
+        #初始化
+        login.appInit()
+
+        #手机号登录
+        login.login(acc, pwd)
+
+        #选择年级
+        #guide = Guide(app)
+        #guide.click_grade()
+
+
+
+
+
+
+
+
+
+
+        #print("current_activity: {}".format(app.device.current_activity))
+        #self.wait_for_equal(self, "没有进入guide界面", app.device, 'current_activity', "com.tencent.k12.module.guide.GuideActivity", timeout=10, interval=0.5)
+
 if __name__ == '__main__':
     HelloTest().debug_run()
 
